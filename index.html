@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Qx?</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #000000;
+      overflow: hidden;
+      cursor: default;
+      user-select: none;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="trollImage" src="Resources/Monkey.jpg" alt="Troll">
+
+  <script>
+    const originalWidth = 736;
+    const originalHeight = 1308;
+
+    const img = document.getElementById('trollImage');
+
+    function ajustarImagen() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      const imageAspect = originalWidth / originalHeight;
+      const screenAspect = screenWidth / screenHeight;
+
+      if (screenAspect > imageAspect) {
+        img.style.height = screenHeight + 'px';
+        img.style.width = 'auto';
+      } else {
+        img.style.width = screenWidth + 'px';
+        img.style.height = 'auto';
+      }
+    }
+
+    window.addEventListener('resize', ajustarImagen);
+    window.addEventListener('load', ajustarImagen);
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (
+        e.ctrlKey && (
+          e.key === 'u' ||
+          e.key === 's' ||
+          e.key === 'i' ||
+          e.key === 'j' ||
+          e.key === 'p'
+        )
+      ) e.preventDefault();
+
+      if (e.key === 'F12') e.preventDefault();
+    });
+  </script>
+
+</body>
+</html>
